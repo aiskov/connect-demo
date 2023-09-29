@@ -1,0 +1,10 @@
+kafka:
+  app-name: join-tables
+  bootstrap-servers: localhost:9092
+  schema-registry-url: http://localhost:8081
+
+  properies:
+    specific.avro.reader: true
+    value.deserializer.specifc.avro.reader: true
+    allow.auto.create.topics: true
+
