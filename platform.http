@@ -43,7 +43,7 @@ Content-Type: application/json
 
     "transforms": "SetValueSchema",
     "transforms.SetValueSchema.type": "org.apache.kafka.connect.transforms.SetSchemaMetadata$Value",
-    "transforms.SetValueSchema.schema.name": "com.aiskov.Invoice"
+    "transforms.SetValueSchema.schema.name": "com.aiskov.InvoiceItem"
   }
 }
 

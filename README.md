@@ -4,6 +4,22 @@ That repo is used to practice Kafka Streams & Kafka Connect. Here I would
 expose working configuration of an environment, instruction how to run
 simple test on it, suggestion of practice tasks and example of the solution. 
 
+<!-- TOC -->
+* [Practice: Using Kafka Connect for Data Extraction](#practice-using-kafka-connect-for-data-extraction)
+  * [Exercises](#exercises)
+  * [Description of the Example](#description-of-the-example)
+  * [How to start](#how-to-start)
+    * [Prerequisites](#prerequisites)
+    * [Prepare environment](#prepare-environment)
+      * [1. Download plugins for Kafka connect](#1-download-plugins-for-kafka-connect)
+      * [2. Install Python Environment](#2-install-python-environment)
+      * [3. Run environment](#3-run-environment)
+      * [4. Configure Kafka Connect](#4-configure-kafka-connect)
+      * [5. Check Event Publishing](#5-check-event-publishing-)
+      * [6. Run Kafka Streams](#6-run-kafka-streams)
+  * [References](#references)
+<!-- TOC -->
+
 ## Exercises
 
 Here are several ideas of task that could be used for practice. 
@@ -136,6 +152,26 @@ to generate Java classes from Avro schemas. To do that, you need to do the follo
 ```bash
 wget http://localhost:8081/subjects/source-mysql-invoice-value/versions/-1/schema -O stream/src/main/avro/Invoice.avsc
 wget http://localhost:8081/subjects/source-mysql-invoice-item-value/versions/-1/schema -O stream/src/main/avro/InvoiceItem.avsc
+```
+
+Then you should be able to generate Java classes using the following command:
+
+```bash
+./gradlew generateAvroJava
+```
+
+Classes will be generated in the `stream/build/generated-main-avro-java`.
+
+Finally, you could run Kafka Streams application using the following command:
+
+```bash
+./gradlew bootRun
+```
+
+In logs, you should see the following:
+
+```text
+
 ```
 
 ## References
