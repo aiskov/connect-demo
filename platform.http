@@ -10,6 +10,14 @@ Accept: application/json
 GET http://localhost:8083/connectors/invoices-source/status
 Accept: application/json
 
+### [Connect] Connector status - invoices-source
+GET http://localhost:8083/connectors/invoices-source/restart
+Accept: application/json
+
+### [Connect] Connector config - invoices-source
+GET http://localhost:8083/connectors/invoices-source/config
+Accept: application/json
+
 ### [Connect] Delete connector - invoices-source
 DELETE http://localhost:8083/connectors/invoices-source
 Accept: application/json
@@ -43,6 +51,14 @@ Content-Type: application/json
 GET http://localhost:8083/connectors/invoice-items-source/status
 Accept: application/json
 
+### [Connect] Connector status - invoice-items-source
+GET http://localhost:8083/connectors/invoices-source/restart
+Accept: application/json
+
+### [Connect] Connector config - invoice-items-source
+GET http://localhost:8083/connectors/invoice-items-source/config
+Accept: application/json
+
 ### [Connect] Delete connector - invoice-items-source
 DELETE http://localhost:8083/connectors/invoice-items-source
 Accept: application/json
@@ -73,15 +89,6 @@ Content-Type: application/json
 GET http://localhost:8081/subjects
 Accept: application/json
 
-### [Schema Registry] Add invoice schema
-POST http://localhost:8081/subjects/source-mysql-invoice-value/versions
-Accept: application/json
-Content-Type: application/json
-
-{
-  "schema": "{\n    \"type\": \"record\",\n    \"name\": \"Invoice\",\n    \"namespace\": \"com.aiskov\",\n    \"fields\": [\n      {\n        \"name\": \"id\",\n        \"type\": \"string\"\n      },\n      {\n        \"name\": \"code\",\n        \"type\": \"string\"\n      },\n      {\n        \"name\": \"created_at\",\n        \"type\": {\n          \"type\": \"long\",\n          \"connect.version\": 1,\n          \"connect.name\": \"org.apache.kafka.connect.data.Timestamp\",\n          \"logicalType\": \"timestamp-millis\"\n        }\n      },\n      {\n        \"name\": \"last_updated_at\",\n        \"type\": {\n          \"type\": \"long\",\n          \"connect.version\": 1,\n          \"connect.name\": \"org.apache.kafka.connect.data.Timestamp\",\n          \"logicalType\": \"timestamp-millis\"\n        }\n      }\n    ],\n    \"connect.name\": \"invoice\"\n  }"
-}
-
 ### [Schema Registry] DELETE invoice schema
 DELETE http://localhost:8081/subjects/source-mysql-invoice-value
 Accept: application/json
@@ -94,23 +101,14 @@ Accept: application/json
 GET http://localhost:8081/subjects/source-mysql-invoice-value/versions/-1/schema
 Accept: application/json
 
-### [Schema Registry] Add invoice schema
-POST http://localhost:8081/subjects/source-mysql-invoice-item-value/versions
-Accept: application/json
-Content-Type: application/json
-
-{
-  "schema": "{\n  \"type\": \"record\",\n  \"name\": \"InvoiceItem\",\n  \"namespace\": \"com.aiskov\",\n  \"fields\": [\n    {\n      \"name\": \"id\",\n      \"type\": \"string\"\n    },\n    {\n      \"name\": \"invoice_id\",\n      \"type\": \"string\"\n    },\n    {\n      \"name\": \"name\",\n      \"type\": \"string\"\n    },\n    {\n      \"name\": \"last_updated_at\",\n      \"type\": {\n        \"type\": \"long\",\n        \"connect.version\": 1,\n        \"connect.name\": \"org.apache.kafka.connect.data.Timestamp\",\n        \"logicalType\": \"timestamp-millis\"\n      }\n    }\n  ]\n}"
-}
-
-### [Schema Registry] DELETE invoice schema
+### [Schema Registry] DELETE invoice item schema
 DELETE http://localhost:8081/subjects/source-mysql-invoice-item-value
 Accept: application/json
 
-### [Schema Registry] Get invoice version
+### [Schema Registry] Get invoice item version
 GET http://localhost:8081/subjects/source-mysql-invoice-item-value/versions
 Accept: application/json
 
-### [Schema Registry] Get invoice schema
+### [Schema Registry] Get invoice item schema
 GET http://localhost:8081/subjects/source-mysql-invoice-item-value/versions/-1/schema
 Accept: application/json
