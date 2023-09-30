@@ -81,7 +81,10 @@ Content-Type: application/json
     "query": "SELECT invoice_item.id, invoice_item.invoice_id, invoice_item.name, invoice.last_updated_at FROM invoice_item INNER JOIN invoice ON invoice_item.invoice_id = invoice.id",
     "mode":"timestamp",
     "timestamp.column.name": "last_updated_at",
-    "value.prefix": "com.asikov."
+
+    "transforms": "SetValueSchema",
+    "transforms.SetValueSchema.type": "org.apache.kafka.connect.transforms.SetSchemaMetadata$Value",
+    "transforms.SetValueSchema.schema.name": "com.aiskov.Invoice"
   }
 }
 

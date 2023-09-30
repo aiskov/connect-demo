@@ -4,6 +4,9 @@
 !/connect-libs/.git-keep
 !/connect-plugin/.git-keep
 
+/stream/src/main/avro/*
+!/stream/src/main/avro/.gitkeep
+
 
 *.iml
 .gradle

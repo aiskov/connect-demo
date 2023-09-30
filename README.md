@@ -127,3 +127,17 @@ You also should be available to get event schema from the schema registry.
 * `### [Schema Registry] Get invoice item schema`
 
 #### 6. Run Kafka Streams
+
+We will use Specific Avro Records in our Kafka Streams application. It requires
+to generate Java classes from Avro schemas. To do that, you need to do the following:
+
+1. Download Avro schemas from the Schema Registry (you also may do that manually using 
+`platform.http` file)
+```bash
+wget http://localhost:8081/subjects/source-mysql-invoice-value/versions/-1/schema -O stream/src/main/avro/Invoice.avsc
+wget http://localhost:8081/subjects/source-mysql-invoice-item-value/versions/-1/schema -O stream/src/main/avro/InvoiceItem.avsc
+```
+
+## References
+
+* https://developer.confluent.io/courses/spring/hands-on-cloud-schema-registry/
