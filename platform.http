@@ -41,7 +41,14 @@ Content-Type: application/json
     "mode":"timestamp",
     "timestamp.column.name": "last_updated_at",
 
-    "transforms": "SetValueSchema",
+    "transforms": "SetKey,ConvertKey,SetValueSchema",
+
+    "transforms.SetKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
+    "transforms.SetKey.fields": "id",
+
+    "transforms.ConvertKey.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+    "transforms.ConvertKey.field": "id",
+
     "transforms.SetValueSchema.type": "org.apache.kafka.connect.transforms.SetSchemaMetadata$Value",
     "transforms.SetValueSchema.schema.name": "com.aiskov.Invoice"
   }
@@ -82,7 +89,14 @@ Content-Type: application/json
     "mode":"timestamp",
     "timestamp.column.name": "last_updated_at",
 
-    "transforms": "SetValueSchema",
+    "transforms": "SetKey,ConvertKey,SetValueSchema",
+
+    "transforms.SetKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
+    "transforms.SetKey.fields": "invoice_id",
+
+    "transforms.ConvertKey.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+    "transforms.ConvertKey.field": "invoice_id",
+
     "transforms.SetValueSchema.type": "org.apache.kafka.connect.transforms.SetSchemaMetadata$Value",
     "transforms.SetValueSchema.schema.name": "com.aiskov.InvoiceItem"
   }

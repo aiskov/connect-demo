@@ -5,8 +5,7 @@
 !/connect-plugin/.git-keep
 
 /stream/src/main/avro/*
-!/stream/src/main/avro/.gitkeep
-
+!/stream/src/main/avro/InvoiceAggregate.avsc
 
 *.iml
 .gradle

@@ -2,16 +2,15 @@ package com.aiskov.jointables.config;
 
 
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.bind.ConstructorBinding;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Getter
+@Data
 @Validated
 @ConfigurationProperties(prefix = "kafka")
 public class KafkaProperties {
@@ -23,6 +22,9 @@ public class KafkaProperties {
 
     @NotBlank
     private String schemaRegistryUrl;
+
+    @NotNull
+    private Boolean alwaysResetOffset;
 
     private Map<String, String> properties = new HashMap<>();
 }

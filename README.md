@@ -168,11 +168,27 @@ Finally, you could run Kafka Streams application using the following command:
 ./gradlew bootRun
 ```
 
-In logs, you should see the following:
+In logs, you should see logs like that (it can take some time to execute join):
 
 ```text
-
+2023-10-01T22:11:11.258+02:00  INFO 36384 --- [-StreamThread-1] c.a.jointables.invoice.JoinInvoiceData   : Processing finished: invoice event bf3ce37e-c1d3-4d6a-a004-d2ed6f9e9ae6: {"id": "bf3ce37e-c1d3-4d6a-a004-d2ed6f9e9ae6", "code": "xpzAaZQfvOhNTDLo", "items": [{"id": "bf3ce37e-c1d3-4d6a-a004-d2ed6f9e9ae6", "name": "Product 3"}, {"id": "bf3ce37e-c1d3-4d6a-a004-d2ed6f9e9ae6", "name": "Product 3"}], "created_at": 2023-10-01T20:10:22Z, "last_updated_at": 2023-10-01T20:10:22Z}.
+2023-10-01T22:11:11.420+02:00  INFO 36384 --- [-StreamThread-1] c.a.jointables.invoice.JoinInvoiceData   : Processing finished: invoice event a17ecf53-a4fc-4a05-8b9a-448f8f17a33e: {"id": "a17ecf53-a4fc-4a05-8b9a-448f8f17a33e", "code": "WVqsQBAOmHznIvRB", "items": [{"id": "a17ecf53-a4fc-4a05-8b9a-448f8f17a33e", "name": "Product 2"}, {"id": "a17ecf53-a4fc-4a05-8b9a-448f8f17a33e", "name": "Product 1"}], "created_at": 2023-10-01T20:10:22Z, "last_updated_at": 2023-10-01T20:10:22Z}.
 ```
+
+now if you check the resulting topic:
+
+```bash
+docker exec -it schema-registry /bin/bash
+kafka-avro-console-consumer --bootstrap-server broker:29092 --topic invoices-event-log --from-beginning
+```
+
+The result should be like that:
+
+```text
+{"id":"bf3ce37e-c1d3-4d6a-a004-d2ed6f9e9ae6","code":"xpzAaZQfvOhNTDLo","items":[{"id":"bf3ce37e-c1d3-4d6a-a004-d2ed6f9e9ae6","name":"Product 3"},{"id":"bf3ce37e-c1d3-4d6a-a004-d2ed6f9e9ae6","name":"Product 3"}],"created_at":1696191022000,"last_updated_at":1696191022000}
+{"id":"a17ecf53-a4fc-4a05-8b9a-448f8f17a33e","code":"WVqsQBAOmHznIvRB","items":[{"id":"a17ecf53-a4fc-4a05-8b9a-448f8f17a33e","name":"Product 2"},{"id":"a17ecf53-a4fc-4a05-8b9a-448f8f17a33e","name":"Product 1"}],"created_at":1696191022000,"last_updated_at":1696191022000}
+```
+
 
 ## References
 

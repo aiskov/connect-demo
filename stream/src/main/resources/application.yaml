@@ -1,9 +1,11 @@
 kafka:
-  app-name: join-tables
+  app-name: demo-stream-app
+  always-reset-offset: true
   bootstrap-servers: localhost:9092
   schema-registry-url: http://localhost:8081
 
   properies:
+    auto.offset.reset: earliest
     specific.avro.reader: true
     value.deserializer.specifc.avro.reader: true
     allow.auto.create.topics: true
