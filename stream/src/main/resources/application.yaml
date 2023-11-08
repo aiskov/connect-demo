@@ -8,5 +8,3 @@ kafka:
     auto.offset.reset: earliest
     specific.avro.reader: true
     value.deserializer.specifc.avro.reader: true
-    allow.auto.create.topics: true
-

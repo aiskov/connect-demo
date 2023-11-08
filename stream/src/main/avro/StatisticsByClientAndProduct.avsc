@@ -1,0 +1,14 @@
+{
+  "type": "record",
+  "name": "StatisticsByClientAndProduct",
+  "namespace": "com.aiskov",
+
+  "fields": [
+    { "name": "clientId", "type": "string" },
+    { "name": "clientName", "type": "string" },
+    { "name": "productName", "type": "string" },
+    { "name": "quantity", "type": "int" },
+    { "name": "price", "type": "double" },
+    { "name": "total", "type": "double" }
+  ]
+}

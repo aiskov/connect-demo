@@ -6,6 +6,8 @@
   "fields": [
     { "name": "id", "type": "string" },
     { "name": "code", "type": "string" },
+    { "name": "status", "type": "string" },
+    { "name": "total", "type": "double" },
 
     {
       "name": "items",
@@ -19,9 +21,26 @@
 
           "fields": [
             { "name": "id", "type": "string" },
-            { "name": "name", "type": "string" }
+            { "name": "name", "type": "string" },
+            { "name": "quantity", "type": "int" },
+            { "name": "price", "type": "double" },
+            { "name": "total", "type": "double" }
           ]
         }
+      }
+    },
+
+    {
+      "name": "client",
+      "type": {
+          "type": "record",
+          "name": "InvoiceAggregateClient",
+          "namespace": "com.aiskov",
+
+          "fields": [
+            { "name": "id", "type": "string" },
+            { "name": "name", "type": ["null", "string"], "default": null }
+          ]
       }
     },
 
