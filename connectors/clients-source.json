@@ -1,0 +1,29 @@
+{
+  "name": "clients-source",
+  "config": {
+    "tasks.max": "1",
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "connection.url": "jdbc:mysql://db:3306/invoices",
+    "connection.user": "root",
+    "connection.password": "toor",
+    "topic.prefix": "source-mysql-",
+    "poll.interval.ms" : 1000,
+    "table.whitelist" : "client",
+    "mode":"timestamp",
+    "timestamp.column.name": "last_updated_at",
+
+    "transforms": "CreateTimestamp,SetKey,ConvertKey,SetValueSchema",
+
+    "transforms.CreateTimestamp.type": "com.github.jcustenborder.kafka.connect.transform.common.ExtractTimestamp$Value",
+    "transforms.CreateTimestamp.field.name": "last_updated_at",
+
+    "transforms.SetKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
+    "transforms.SetKey.fields": "id",
+
+    "transforms.ConvertKey.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+    "transforms.ConvertKey.field": "id",
+
+    "transforms.SetValueSchema.type": "org.apache.kafka.connect.transforms.SetSchemaMetadata$Value",
+    "transforms.SetValueSchema.schema.name": "com.aiskov.Client"
+  }
+}

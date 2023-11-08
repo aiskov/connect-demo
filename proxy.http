@@ -1,0 +1,36 @@
+### [Rest Proxy] Topics
+GET http://localhost:8082/topics
+Accept: application/vnd.kafka.v2+json
+
+#
+# Invoice
+#
+### [Rest Proxy/Invoice] Invoice topic
+GET http://localhost:8082/topics/source-mysql-invoice
+Accept: application/vnd.kafka.v2+json
+
+### [Rest Proxy/Invoice] Invoice topic offsets
+GET http://localhost:8082/topics/source-mysql-invoice/partitions/0/offsets
+Accept: application/vnd.kafka.v2+json
+
+#
+# Invoice Item
+#
+### [Rest Proxy/Invoice] Invoice topic
+GET http://localhost:8082/topics/source-mysql-invoice
+Accept: application/vnd.kafka.v2+json
+
+### [Rest Proxy/Invoice] Invoice topic offsets
+GET http://localhost:8082/topics/source-mysql-invoice/partitions/0/offsets
+Accept: application/vnd.kafka.v2+json
+
+#
+# Client
+#
+### [Rest Proxy/Client] Client topic
+GET http://localhost:8082/topics/source-mysql-client
+Accept: application/vnd.kafka.v2+json
+
+### [Rest Proxy/Client] Client topic offsets
+GET http://localhost:8082/topics/source-mysql-client/partitions/0/offsets
+Accept: application/vnd.kafka.v2+json

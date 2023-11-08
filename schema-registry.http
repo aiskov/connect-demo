@@ -1,0 +1,51 @@
+### [Schema Registry] List all subjects
+GET http://localhost:8081/subjects
+Accept: application/json
+
+#
+# Invoice
+#
+
+### [Schema Registry/Invoice] Delete schema
+DELETE http://localhost:8081/subjects/source-mysql-invoice-value
+Accept: application/json
+
+### [Schema Registry/Invoice] Get versions
+GET http://localhost:8081/subjects/source-mysql-invoice-value/versions
+Accept: application/json
+
+### [Schema Registry/Invoice] Get schema
+GET http://localhost:8081/subjects/source-mysql-invoice-value/versions/-1/schema
+Accept: application/json
+
+#
+# Invoice Item
+#
+
+### [Schema Registry/Invoice Item] Delete schema
+DELETE http://localhost:8081/subjects/source-mysql-invoice-item-value
+Accept: application/json
+
+### [Schema Registry/Invoice Item] Get versions
+GET http://localhost:8081/subjects/source-mysql-invoice-item-value/versions
+Accept: application/json
+
+### [Schema Registry/Invoice Item] Get schema
+GET http://localhost:8081/subjects/source-mysql-invoice-item-value/versions/-1/schema
+Accept: application/json
+
+#
+# Client
+#
+
+### [Schema Registry/Client] Delete schema
+DELETE http://localhost:8081/subjects/source-mysql-client-value
+Accept: application/json
+
+### [Schema Registry/Client] Get versions
+GET http://localhost:8081/subjects/source-mysql-client-value/versions
+Accept: application/json
+
+### [Schema Registry/Client] Get schema
+GET http://localhost:8081/subjects/source-mysql-client-value/versions/-1/schema
+Accept: application/json

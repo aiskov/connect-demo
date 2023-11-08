@@ -1,0 +1,29 @@
+{
+  "name": "invoice-items-source",
+  "config": {
+    "tasks.max": "1",
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "connection.url": "jdbc:mysql://db:3306/invoices",
+    "connection.user": "root",
+    "connection.password": "toor",
+    "topic.prefix": "source-mysql-invoice-item",
+    "poll.interval.ms" : 1000,
+    "query": "SELECT invoice_item.id, invoice_item.invoice_id, invoice_item.name, invoice.last_updated_at, invoice_item.quantity, invoice_item.price FROM invoice_item INNER JOIN invoice ON invoice_item.invoice_id = invoice.id",
+    "mode":"timestamp",
+    "timestamp.column.name": "last_updated_at",
+
+    "transforms": "CreateTimestamp,SetKey,ConvertKey,SetValueSchema",
+
+    "transforms.CreateTimestamp.type": "com.github.jcustenborder.kafka.connect.transform.common.ExtractTimestamp$Value",
+    "transforms.CreateTimestamp.field.name": "last_updated_at",
+
+    "transforms.SetKey.type": "org.apache.kafka.connect.transforms.ValueToKey",
+    "transforms.SetKey.fields": "invoice_id",
+
+    "transforms.ConvertKey.type": "org.apache.kafka.connect.transforms.ExtractField$Key",
+    "transforms.ConvertKey.field": "invoice_id",
+
+    "transforms.SetValueSchema.type": "org.apache.kafka.connect.transforms.SetSchemaMetadata$Value",
+    "transforms.SetValueSchema.schema.name": "com.aiskov.InvoiceItem"
+  }
+}

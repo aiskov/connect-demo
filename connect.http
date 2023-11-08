@@ -1,0 +1,88 @@
+### [Connect] Available plugins
+GET http://localhost:8083/connector-plugins/
+Accept: application/json
+
+### [Connect] Configured connectors
+GET http://localhost:8083/connectors/
+Accept: application/json
+
+#
+# Invoice
+#
+
+### [Connect/Invoice] Connector status
+GET http://localhost:8083/connectors/invoices-source/status
+Accept: application/json
+
+### [Connect/Invoice] Connector restart
+GET http://localhost:8083/connectors/invoices-source/restart
+Accept: application/json
+
+### [Connect/Invoice] Connector config
+GET http://localhost:8083/connectors/invoices-source/config
+Accept: application/json
+
+### [Connect/Invoice] Delete connector
+DELETE http://localhost:8083/connectors/invoices-source
+Accept: application/json
+
+### [Connect/Invoice] Create connector
+POST http://localhost:8083/connectors
+Accept: application/json
+Content-Type: application/json
+
+< ./connectors/invoices-source.json
+
+#
+# Invoice Item
+#
+
+### [Connect/Invoice Item] Connector status
+GET http://localhost:8083/connectors/invoice-items-source/status
+Accept: application/json
+
+### [Connect/Invoice Item] Connector status
+GET http://localhost:8083/connectors/invoices-items-source/restart
+Accept: application/json
+
+### [Connect/Invoice Item] Connector config
+GET http://localhost:8083/connectors/invoice-items-source/config
+Accept: application/json
+
+### [Connect/Invoice Item] Delete connector
+DELETE http://localhost:8083/connectors/invoice-items-source
+Accept: application/json
+
+### [Connect/Invoice Item] Create connector
+POST http://localhost:8083/connectors
+Accept: application/json
+Content-Type: application/json
+
+< ./connectors/invoice-items-source.json
+
+#
+# Client
+#
+
+### [Connect/Client] Connector status
+GET http://localhost:8083/connectors/clients-source/status
+Accept: application/json
+
+### [Connect/Client] Connector status
+GET http://localhost:8083/connectors/clients-source/restart
+Accept: application/json
+
+### [Connect/Client] Connector config
+GET http://localhost:8083/connectors/clients-source/config
+Accept: application/json
+
+### [Connect/Client] Delete connector
+DELETE http://localhost:8083/connectors/clients-source
+Accept: application/json
+
+### [Connect/Client] Create connector
+POST http://localhost:8083/connectors
+Accept: application/json
+Content-Type: application/json
+
+< ./connectors/clients-source.json

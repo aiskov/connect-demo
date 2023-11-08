@@ -1,4 +1,5 @@
-version: '2'
+version: '3.7'
+
 services:
   # Database
   db:
@@ -42,6 +43,8 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092
       KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_NUM_PARTITIONS: 3
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
@@ -103,3 +106,22 @@ services:
     volumes:
       - ./connect-plugins:/usr/share/confluent-hub-components/
       - ./connect-libs:/usr/share/connect-libs/
+    deploy:
+      resources:
+        limits:
+          cpus: '0.001'
+
+  rest-proxy:
+    image: confluentinc/cp-kafka-rest:7.5.0
+    depends_on:
+      - broker
+      - schema-registry
+    ports:
+      - 8082:8082
+    hostname: rest-proxy
+    container_name: rest-proxy
+    environment:
+      KAFKA_REST_HOST_NAME: rest-proxy
+      KAFKA_REST_BOOTSTRAP_SERVERS: 'broker:29092'
+      KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
+      KAFKA_REST_SCHEMA_REGISTRY_URL: 'http://schema-registry:8081'

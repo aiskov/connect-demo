@@ -1,11 +1,11 @@
 /connect-libs/*
 /connect-plugins/**
 
-!/connect-libs/.git-keep
-!/connect-plugin/.git-keep
+!.git-keep
 
 /stream/src/main/avro/*
 !/stream/src/main/avro/InvoiceAggregate.avsc
+!/stream/src/main/avro/StatisticsByClientAndProduct.avsc
 
 *.iml
 .gradle

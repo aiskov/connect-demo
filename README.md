@@ -1,4 +1,5 @@
-# Practice: Using Kafka Connect for Data Extraction
+Practice: Using Kafka Connect for Data Extraction
+=================================================
 
 That repo is used to practice Kafka Streams & Kafka Connect. Here I would 
 expose working configuration of an environment, instruction how to run
@@ -25,10 +26,11 @@ simple test on it, suggestion of practice tasks and example of the solution.
 Here are several ideas of task that could be used for practice. 
 
 1. Join data from client table
-2. Create event of status change
-3. Configure backups of events
-4. Configure live synchronization with another database
-5. Configure reindexing of events
+2. Join data form invoice item table
+3. Calculate statistics 
+4. Configure backups of events
+5. Configure live synchronization with another database
+6. Configure reindexing of events
 
 ## Description of the Example
 
@@ -49,7 +51,8 @@ Here are several ideas of task that could be used for practice.
 
 You need to download the following plugins:
 
-- [confluent.io/hub/confluentinc/kafka-connect-jdbc](https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc)
+- [confluentinc/kafka-connect-jdbc](https://www.confluent.io/hub/confluentinc/kafka-connect-jdbc)
+- [jcustenborder/kafka-connect-transform-common](https://www.confluent.io/hub/jcustenborder/kafka-connect-transform-common)
 
 Also for JDBC connector, you need to download JDBC driver for your database. For example, for MySQL you can download
 it from here: [dev.mysql.com/downloads/connector/j/](https://dev.mysql.com/downloads/connector/j/)
@@ -59,6 +62,7 @@ Finally, you should get the following files:
 ```
 connect-plugins/
 ├── confluentinc-kafka-connect-jdbc-10.7.4/
+├── jcustenborder-kafka-connect-transform-common-0.1.0.58/
 connect-libs/
 ├── mysql-connector-java-8.0.26.jar
 ```
@@ -87,7 +91,7 @@ It could take several minutes to download all images and start them all.
 
 I prepared a list of requests that could be helpful to work with 
 Kafka Connect and Schema Registry. It could be found in the file 
-`platform.http`.
+`connect.http`.
 
 To start, you need to create connectors that extract data from the MySQL. To do 
 that, execute the following requests:
@@ -148,10 +152,11 @@ We will use Specific Avro Records in our Kafka Streams application. It requires
 to generate Java classes from Avro schemas. To do that, you need to do the following:
 
 1. Download Avro schemas from the Schema Registry (you also may do that manually using 
-`platform.http` file)
+`schema-registry.http` file)
 ```bash
 wget http://localhost:8081/subjects/source-mysql-invoice-value/versions/-1/schema -O stream/src/main/avro/Invoice.avsc
 wget http://localhost:8081/subjects/source-mysql-invoice-item-value/versions/-1/schema -O stream/src/main/avro/InvoiceItem.avsc
+wget http://localhost:8081/subjects/source-mysql-client-value/versions/-1/schema -O stream/src/main/avro/Client.avsc
 ```
 
 Then you should be able to generate Java classes using the following command:
